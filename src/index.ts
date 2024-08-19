@@ -17,6 +17,7 @@ class AlegebraicFileEvaluator {
       row.map((cell: string) => evaluator.evaluateExpression(cell).toString())
     );
     await handler.writer.write(outputFilePath, evaluatedData);
+    console.log(`File ${inputFilePath} processed successfully`);
   }
 }
 
