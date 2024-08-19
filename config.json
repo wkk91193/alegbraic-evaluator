@@ -1,0 +1,14 @@
+{
+  "files": [
+    {
+      "inputFilePath": "resources/input.csv",
+      "outputFilePath": "resources/output.csv",
+      "fileType": "csv"
+    },
+    {
+      "inputFilePath": "resources/input.tsv",
+      "outputFilePath": "resources/output.tsv",
+      "fileType": "tsv"
+    }
+  ]
+}
