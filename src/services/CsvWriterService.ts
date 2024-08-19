@@ -3,7 +3,6 @@ import * as fastCsv from 'fast-csv';
 import { FileWriter } from '../interfaces/FileWriter';
 
 export class CsvWriterService implements FileWriter {
-    
   async write(filePath: string, data: string[][]): Promise<void> {
     return new Promise((resolve, reject) => {
       const writeStream = fs.createWriteStream(filePath);
@@ -11,7 +10,7 @@ export class CsvWriterService implements FileWriter {
 
       csvStream.pipe(writeStream).on('end', resolve).on('error', reject);
 
-      data.forEach((row) => csvStream.write(row));
+      data.forEach((row) => csvStream.write(row.join(','))); // Convert array to CSV-formatted string
       csvStream.end();
     });
   }

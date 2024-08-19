@@ -1,6 +1,6 @@
 // src/utils.ts
 
-import { promises as fs } from 'fs';
+import * as fs from 'fs';
 import path from 'path';
 
 export interface FileConfig {
@@ -10,10 +10,22 @@ export interface FileConfig {
 }
 
 export async function loadConfig(): Promise<FileConfig[]> {
-  const configPath = path.resolve(__dirname, '../config.json');
-  const configFile = await fs.readFile(configPath, 'utf-8');
-  const config = JSON.parse(configFile);
-  return config.files as FileConfig[];
+  try {
+    const configPath = path.resolve(__dirname, '../config.json');
+    const configFile = await fs.promises.readFile(configPath, 'utf-8');
+    const files = JSON.parse(configFile)?.files;
+
+    for (const file of files) {
+      //Validate config file content
+      if (!file.inputFilePath || !file.outputFilePath || !file.fileType) {
+        throw new Error('Invalid configuration file');
+      }
+    }
+
+    return files as FileConfig[];
+  } catch (err) {
+    throw new Error(`Error loading configuration: ${err}`);
+  }
 }
 
 export function extractValuesFromHeader(

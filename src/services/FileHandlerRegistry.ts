@@ -1,12 +1,12 @@
-import { FileParser } from '../interfaces/FileParser';
+import { FileReader } from '../interfaces/FileReader';
 import { FileWriter } from '../interfaces/FileWriter';
-import { CsvParserService } from './CsvParserService';
-import { TsvParserService } from './TsvParserService';
+import { CsvReaderService } from './CsvReaderService';
+import { TsvReaderService } from './TsvReaderService';
 import { CsvWriterService } from './CsvWriterService';
 import { TsvWriterService } from './TsvWriterService';
 
 type HandlerEntry = {
-  parser: FileParser;
+  parser: FileReader;
   writer: FileWriter;
 };
 
@@ -15,7 +15,7 @@ export class FileHandlerRegistry {
 
   public static register(
     fileType: string,
-    parser: FileParser,
+    parser: FileReader,
     writer: FileWriter
   ): void {
     this.handlers[fileType] = { parser, writer };
@@ -30,6 +30,14 @@ export class FileHandlerRegistry {
   }
 }
 
- // Register handlers for known file types
-FileHandlerRegistry.register('csv', new CsvParserService(), new CsvWriterService());
-FileHandlerRegistry.register('tsv', new TsvParserService(), new TsvWriterService());
+// Register handlers for known file types
+FileHandlerRegistry.register(
+  'csv',
+  new CsvReaderService(),
+  new CsvWriterService()
+);
+FileHandlerRegistry.register(
+  'tsv',
+  new TsvReaderService(),
+  new TsvWriterService()
+);

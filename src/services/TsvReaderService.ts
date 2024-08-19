@@ -1,9 +1,9 @@
 import * as fs from 'fs';
 import * as fastCsv from 'fast-csv';
-import { FileParser } from '../interfaces/FileParser';
+import { FileReader } from '../interfaces/FileReader';
 
-export class TsvParserService implements FileParser {
-  async parse(filePath: string): Promise<string[][]> {
+export class TsvReaderService implements FileReader {
+  async read(filePath: string): Promise<string[][]> {
     return new Promise((resolve, reject) => {
       const rows: string[][] = [];
       fs.createReadStream(filePath)
