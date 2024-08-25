@@ -5,10 +5,10 @@ import { TsvReaderService } from './TsvReaderService';
 import { CsvWriterService } from './CsvWriterService';
 import { TsvWriterService } from './TsvWriterService';
 
-type HandlerEntry = {
+interface HandlerEntry {
   parser: FileReader;
   writer: FileWriter;
-};
+}
 
 export class FileHandlerRegistry {
   private static handlers: Record<string, HandlerEntry> = {};
