@@ -1,0 +1,22 @@
+# Ignore artifacts:
+build
+coverage
+dist
+node_modules
+
+# Ignore config files:
+.eslintrc.json
+.prettierrc
+tsconfig.json
+
+# Ignore environment files:
+.env
+
+# Ignore specific file types:
+*.log
+*.min.js
+*.min.css
+
+# Ignore specific directories:
+logs/
+scripts/
